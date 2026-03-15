@@ -20,4 +20,21 @@ export const globalStyles = StyleSheet.create({
     paddingVertical: 1,
     paddingHorizontal: 3,
   },
+  primaryFont: {
+    fontFamily: 'Rowdies_400Regular',
+  },
+  secondaryFont: {
+    fontFamily: 'Montserrat_400Regular',
+  },
+  keyboardButton: {
+    padding: 5,
+    backgroundColor: colors.white5,
+    borderRadius: 10,
+    margin: 5,
+    cursor: 'pointer',
+  },
+  keyboardButtonHover: {
+    borderColor: colors.white15,
+    borderWidth: 3,
+  },
 })
