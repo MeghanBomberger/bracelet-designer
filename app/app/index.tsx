@@ -1,9 +1,10 @@
 import { 
   ImageBackground, 
   StyleSheet,
+  useWindowDimensions,
   View,
 } from 'react-native'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { colors } from '@/utils/colors'
 import { globalStyles } from '@/utils/global.styles'
@@ -12,8 +13,17 @@ import { ErrorMessage } from '@/components/ErrorMessage'
 import { RotateMessage } from '@/components/RotateMessage'
 
 export default function Home() {
+  const { height, width } = useWindowDimensions()
   const [ errorMessage, setErrorMessage ] = useState<string>('')
   const [ rotateMessage, setRotateMessage ] = useState<boolean>(true)
+
+  useEffect(() => {
+    setRotateMessage(height > width)
+  }, [height, width])
+
+  console.log('height', height)
+  console.log('width', width)
+  console.log('rotateMessage', rotateMessage)
 
   return (
     <ImageBackground
