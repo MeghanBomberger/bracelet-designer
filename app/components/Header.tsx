@@ -1,4 +1,4 @@
-import { 
+import {
   View,
   StyleSheet,
   useWindowDimensions,
@@ -14,15 +14,15 @@ export const Header = () => {
   return (
     <View style={[styles.header, globalStyles.centerH]}>
       <View style={styles.logoPosition}>
-        <Logo 
+        <Logo
           height={
-            height > width 
-              ? height * 0.02 
+            height > width
+              ? height * 0.02
               : height * 0.0375
           }
           width={
-            height > width 
-              ? height * 0.02 * logoRatioWtoH 
+            height > width
+              ? height * 0.02 * logoRatioWtoH
               : height * 0.0375 * logoRatioWtoH
           }
           color={colors.white65}

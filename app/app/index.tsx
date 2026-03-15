@@ -21,10 +21,6 @@ export default function Home() {
     setRotateMessage(height > width)
   }, [height, width])
 
-  console.log('height', height)
-  console.log('width', width)
-  console.log('rotateMessage', rotateMessage)
-
   return (
     <ImageBackground
       source={require('@/assets/images/background.jpg')}
