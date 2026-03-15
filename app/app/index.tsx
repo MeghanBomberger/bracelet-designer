@@ -1,17 +1,29 @@
 import { 
   ImageBackground, 
   StyleSheet,
+  useWindowDimensions,
   View,
 } from 'react-native'
+import { useEffect, useState } from 'react'
 
 import { colors } from '@/utils/colors'
 import { globalStyles } from '@/utils/global.styles'
 import { Header } from '@/components/Header'
-import { useState } from 'react'
 import { ErrorMessage } from '@/components/ErrorMessage'
+import { RotateMessage } from '@/components/RotateMessage'
 
 export default function Home() {
-  const [ errorMessage, setErrorMessage ] = useState<string>('test error message')
+  const { height, width } = useWindowDimensions()
+  const [ errorMessage, setErrorMessage ] = useState<string>('')
+  const [ rotateMessage, setRotateMessage ] = useState<boolean>(true)
+
+  useEffect(() => {
+    setRotateMessage(height > width)
+  }, [height, width])
+
+  console.log('height', height)
+  console.log('width', width)
+  console.log('rotateMessage', rotateMessage)
 
   return (
     <ImageBackground
@@ -31,6 +43,9 @@ export default function Home() {
             message={errorMessage}
             onClose={() => setErrorMessage('')} 
           />
+        )}
+        {!!rotateMessage && (
+          <RotateMessage/>
         )}
       </View>
     </ImageBackground>

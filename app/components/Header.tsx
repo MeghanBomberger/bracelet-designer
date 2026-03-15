@@ -1,16 +1,32 @@
 import { 
   View,
   StyleSheet,
+  useWindowDimensions,
 } from 'react-native'
 
-import { Logo } from '@/assets/images/logo'
 import { globalStyles } from '@/utils/global.styles'
+import { colors } from '@/utils/colors'
+import { Logo, logoRatioWtoH } from '@/assets/images/Logo'
 
 export const Header = () => {
+  const { height, width } = useWindowDimensions()
+
   return (
     <View style={[styles.header, globalStyles.centerH]}>
       <View style={styles.logoPosition}>
-        <Logo sizeRatio={0.075}/>
+        <Logo 
+          height={
+            height > width 
+              ? height * 0.02 
+              : height * 0.0375
+          }
+          width={
+            height > width 
+              ? height * 0.02 * logoRatioWtoH 
+              : height * 0.0375 * logoRatioWtoH
+          }
+          color={colors.white65}
+        />
       </View>
     </View>
   )

@@ -1,6 +1,8 @@
 import { colors } from "@/utils/colors";
 import { SVGProps } from "./svg.type";
 
+export const logoRatioWtoH = 1386 / 184
+
 export const Logo = ({
   width = 1386,
   height = 184,
