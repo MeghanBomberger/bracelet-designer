@@ -26,6 +26,9 @@ export const globalStyles = StyleSheet.create({
   secondaryFont: {
     fontFamily: 'Montserrat_400Regular',
   },
+  accentFont: {
+    fontFamily: 'Datatype_400Regular',
+  },
   keyboardButton: {
     padding: 5,
     backgroundColor: colors.white5,

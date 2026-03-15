@@ -7,8 +7,12 @@ import {
 import { colors } from '@/utils/colors'
 import { globalStyles } from '@/utils/global.styles'
 import { Header } from '@/components/Header'
+import { useState } from 'react'
+import { ErrorMessage } from '@/components/ErrorMessage'
 
 export default function Home() {
+  const [ errorMessage, setErrorMessage ] = useState<string>('test error message')
+
   return (
     <ImageBackground
       source={require('@/assets/images/background.jpg')}
@@ -22,7 +26,12 @@ export default function Home() {
           globalStyles.centerV,
         ]}
       >
-
+        {!!errorMessage && (
+          <ErrorMessage 
+            message={errorMessage}
+            onClose={() => setErrorMessage('')} 
+          />
+        )}
       </View>
     </ImageBackground>
   )
