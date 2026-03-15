@@ -16,6 +16,9 @@ export default function Home() {
   const { height, width } = useWindowDimensions()
   const [ errorMessage, setErrorMessage ] = useState<string>('')
   const [ rotateMessage, setRotateMessage ] = useState<boolean>(true)
+  // const [ selectedBlank, setSelectedBlank ] = useState({})
+  // const [ selectedStamps, setSelectedStamps ] = useState([])
+  // const [ largestStamp, setLargestStamp ] = useState(0)
 
   useEffect(() => {
     setRotateMessage(height > width)
@@ -42,6 +45,17 @@ export default function Home() {
         )}
         {!!rotateMessage && (
           <RotateMessage/>
+        )}
+        {!rotateMessage && (
+          <>
+            {/* <PickBlank/> */}
+
+            {/* <Bracelet/> */}
+            
+            {/* {selectedBlank.shape && (
+              <Stamps/>
+            )} */}
+          </>
         )}
       </View>
     </ImageBackground>
