@@ -1,4 +1,4 @@
-import { Animated, Easing, Platform, StyleSheet, useWindowDimensions } from "react-native";
+import { Animated, Easing, ImageBackground, StyleSheet, useWindowDimensions, View } from "react-native";
 import { useEffect, useRef } from "react";
 
 import { Bracelet as BraceletType, defaultBracelet, Metal } from "@/utils/types/bracelet.types";
@@ -9,11 +9,13 @@ interface BraceletProps {
   selectedStamps: Stamp[];
 }
 
-const getFilter = (bracelet: BraceletType) => {
-  if (!bracelet?.metal) return 'grayscale(100%)';
-  if (bracelet.metal === Metal.copper) return 'hue-rotate(175deg) saturate(265%)';
-  if (bracelet.metal === Metal.silver) return 'hue-rotate(200deg) saturate(250%)';
-  return 'grayscale(100%)';
+const getOverlayColor = (metal: Metal): string => {
+  switch (metal) {
+    case Metal.copper: return 'rgba(200, 115, 51, 0.5)';
+    case Metal.silver: return 'rgba(192, 192, 242, 0.4)';
+    case Metal.brass: return 'rgba(180, 178, 56, 0.5)';
+    default: return 'rgba(0, 0, 0, 0)';
+  }
 };
 
 export const Bracelet = ({
@@ -36,20 +38,29 @@ export const Bracelet = ({
       easing: Easing.ease,
       useNativeDriver: false,
     }).start();
-  }, [targetHeight]);
+  }, [targetHeight, animatedHeight]);
+
+  const activeBracelet = bracelet || defaultBracelet;
 
   return (
     <Animated.View
       style={[
         braceletStyles.braceletContainer,
-        {
-          height: animatedHeight,
-          ...(Platform.OS === 'web' ? { filter: getFilter(bracelet || defaultBracelet) } : {}),
-          backgroundColor: 'red',
-        }
+        { height: animatedHeight },
       ]}
     >
-
+      <ImageBackground
+        source={require('@/assets/images/metal-texture.jpg')}
+        style={braceletStyles.bracelet}
+        resizeMode="cover"
+      >
+        <View style={[
+          braceletStyles.overlay,
+          { backgroundColor: getOverlayColor(activeBracelet.metal) }
+        ]} />
+        <View style={braceletStyles.contentContainer}>
+        </View>
+      </ImageBackground>
     </Animated.View>
   )
 }
@@ -59,9 +70,18 @@ const styles = (width: number) => StyleSheet.create({
     marginTop: width * 0.02,
     marginBottom: width * 0.02,
     width: width * 0.85,
+    overflow: 'hidden',
+    borderRadius: 10,
   },
   bracelet: {
     width: '100%',
-
-  }
+    height: '100%',
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  contentContainer: {
+    flex: 1,
+    zIndex: 1,
+  },
 })
