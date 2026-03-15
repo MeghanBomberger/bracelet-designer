@@ -6,6 +6,7 @@ import {
 
 import { colors } from '@/utils/colors'
 import { globalStyles } from '@/utils/global.styles'
+import { Header } from '@/components/Header'
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       resizeMode="cover"
       style={styles.background}
     >
+      <Header/>
       <View 
         style={[
           styles.contents,
@@ -34,12 +36,11 @@ const styles = StyleSheet.create({
   },
   contents: {
     position: 'absolute',
-    top: '5%',
-    right: '2%',
-    left: '2%',
-    bottom: '5%',
-    backgroundColor: colors.white15,
-    borderRadius: '2rem',
-    paddingVertical: '3%',
+    top: 25,
+    right: 10,
+    left: 10,
+    bottom: 10,
+    backgroundColor: colors.white2,
+    borderRadius: 16,
   },
 })
