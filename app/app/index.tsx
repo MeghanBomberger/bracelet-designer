@@ -11,14 +11,16 @@ import { globalStyles } from '@/utils/global.styles'
 import { Header } from '@/components/Header'
 import { ErrorMessage } from '@/components/ErrorMessage'
 import { RotateMessage } from '@/components/RotateMessage'
+import { Bracelet } from '@/components/Bracelet'
+import { Bracelet as BraceletType } from '@/utils/types/bracelet.types'
+import { Stamp } from '@/utils/types/stamp.types'
 
 export default function Home() {
   const { height, width } = useWindowDimensions()
   const [ errorMessage, setErrorMessage ] = useState<string>('')
   const [ rotateMessage, setRotateMessage ] = useState<boolean>(true)
-  // const [ selectedBlank, setSelectedBlank ] = useState({})
-  // const [ selectedStamps, setSelectedStamps ] = useState([])
-  // const [ largestStamp, setLargestStamp ] = useState(0)
+  const [ selectedBlank, setSelectedBlank ] = useState<BraceletType | null>(null)
+  const [ selectedStamps, setSelectedStamps ] = useState<Stamp[]>([])
 
   useEffect(() => {
     setRotateMessage(height > width)
@@ -50,8 +52,11 @@ export default function Home() {
           <>
             {/* <PickBlank/> */}
 
-            {/* <Bracelet/> */}
-            
+            <Bracelet
+              bracelet={selectedBlank}
+              selectedStamps={selectedStamps}
+            />
+
             {/* {selectedBlank.shape && (
               <Stamps/>
             )} */}
