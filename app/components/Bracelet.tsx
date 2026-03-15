@@ -51,7 +51,10 @@ export const Bracelet = ({
     >
       <ImageBackground
         source={require('@/assets/images/metal-texture.jpg')}
-        style={braceletStyles.bracelet}
+        style={[
+          braceletStyles.bracelet,
+          bracelet?.shape === 'tapered' && { borderRadius: '100%' },
+        ]}
         resizeMode="cover"
       >
         <View style={[
@@ -71,7 +74,7 @@ const styles = (width: number) => StyleSheet.create({
     marginBottom: width * 0.02,
     width: width * 0.85,
     overflow: 'hidden',
-    borderRadius: 10,
+    borderRadius: width * 0.15,
   },
   bracelet: {
     width: '100%',
