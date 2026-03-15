@@ -6,7 +6,7 @@ import {
 
 import { globalStyles } from '@/utils/global.styles'
 import { colors } from '@/utils/colors'
-import { Logo, logoRatioWtoH } from '@/assets/images/Logo'
+import { Logo, logoRatioWtoH } from '@/assets/images/logo'
 
 export const Header = () => {
   const { height, width } = useWindowDimensions()
