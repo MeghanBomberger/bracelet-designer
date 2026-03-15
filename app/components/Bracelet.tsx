@@ -1,7 +1,7 @@
-import { Animated, Easing, ImageBackground, StyleSheet, useWindowDimensions, View } from "react-native";
+import { Animated, Easing, ImageBackground, Platform, StyleSheet, useWindowDimensions, View } from "react-native";
 import { useEffect, useRef } from "react";
 
-import { Bracelet as BraceletType, defaultBracelet, Metal } from "@/utils/types/bracelet.types";
+import { Bracelet as BraceletType, defaultBracelet, Metal, Shape } from "@/utils/types/bracelet.types";
 import { Stamp } from "@/utils/types/stamp.types";
 
 interface BraceletProps {
@@ -41,28 +41,50 @@ export const Bracelet = ({
   }, [targetHeight, animatedHeight]);
 
   const activeBracelet = bracelet || defaultBracelet;
+  const borderRadius = activeBracelet.shape === Shape.tapered ? width * 0.15 : width * 0.02;
+  const insetBorderWidth = Math.max(2, width * 0.004);
+
+  const shadowStyle = Platform.select({
+    web: {
+      boxShadow: 'rgb(79, 81, 85) 3px 3px 1px, rgba(0, 0, 0, 0.25) 5px 5px 5px, rgba(0, 0, 0, 0.25) 10px 15px 10px',
+    } as object,
+    ios: {
+      shadowColor: '#4f5155',
+      shadowOffset: { width: 3, height: 5 },
+      shadowOpacity: 0.35,
+      shadowRadius: 6,
+    },
+    default: {
+      elevation: 6,
+    },
+  });
 
   return (
     <Animated.View
       style={[
         braceletStyles.braceletContainer,
-        { height: animatedHeight },
+        { height: animatedHeight, borderRadius },
+        shadowStyle,
       ]}
     >
       <ImageBackground
         source={require('@/assets/images/metal-texture.jpg')}
-        style={[
-          braceletStyles.bracelet,
-          bracelet?.shape === 'tapered' && { borderRadius: '100%' },
-        ]}
+        style={braceletStyles.bracelet}
         resizeMode="cover"
       >
         <View style={[
           braceletStyles.overlay,
           { backgroundColor: getOverlayColor(activeBracelet.metal) }
         ]} />
-        <View style={braceletStyles.contentContainer}>
-        </View>
+        <View style={[
+          braceletStyles.insetHighlight,
+          { borderRadius, borderWidth: insetBorderWidth },
+        ]} />
+        <View style={[
+          braceletStyles.insetShadow,
+          { borderRadius, borderWidth: insetBorderWidth },
+        ]} />
+        <View style={braceletStyles.contentContainer} />
       </ImageBackground>
     </Animated.View>
   )
@@ -74,7 +96,6 @@ const styles = (width: number) => StyleSheet.create({
     marginBottom: width * 0.02,
     width: width * 0.85,
     overflow: 'hidden',
-    borderRadius: width * 0.15,
   },
   bracelet: {
     width: '100%',
@@ -82,6 +103,20 @@ const styles = (width: number) => StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
+  },
+  insetHighlight: {
+    ...StyleSheet.absoluteFillObject,
+    borderTopColor: 'rgba(255, 255, 255, 0.25)',
+    borderLeftColor: 'rgba(255, 255, 255, 0.25)',
+    borderBottomColor: 'transparent',
+    borderRightColor: 'transparent',
+  },
+  insetShadow: {
+    ...StyleSheet.absoluteFillObject,
+    borderTopColor: 'transparent',
+    borderLeftColor: 'transparent',
+    borderBottomColor: 'rgba(0, 0, 0, 0.3)',
+    borderRightColor: 'rgba(0, 0, 0, 0.3)',
   },
   contentContainer: {
     flex: 1,
