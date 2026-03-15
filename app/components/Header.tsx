@@ -5,12 +5,13 @@ import {
 
 import { Logo } from '@/assets/images/logo'
 import { globalStyles } from '@/utils/global.styles'
+import { colors } from '@/utils/colors'
 
 export const Header = () => {
   return (
     <View style={[styles.header, globalStyles.centerH]}>
       <View style={styles.logoPosition}>
-        <Logo sizeRatio={0.075}/>
+        <Logo sizeRatio={0.075} color={colors.white65}/>
       </View>
     </View>
   )

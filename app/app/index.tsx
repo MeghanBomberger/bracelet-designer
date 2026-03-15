@@ -3,15 +3,17 @@ import {
   StyleSheet,
   View,
 } from 'react-native'
+import { useState } from 'react'
 
 import { colors } from '@/utils/colors'
 import { globalStyles } from '@/utils/global.styles'
 import { Header } from '@/components/Header'
-import { useState } from 'react'
 import { ErrorMessage } from '@/components/ErrorMessage'
+import { RotateMessage } from '@/components/RotateMessage'
 
 export default function Home() {
-  const [ errorMessage, setErrorMessage ] = useState<string>('test error message')
+  const [ errorMessage, setErrorMessage ] = useState<string>('')
+  const [ rotateMessage, setRotateMessage ] = useState<boolean>(true)
 
   return (
     <ImageBackground
@@ -31,6 +33,9 @@ export default function Home() {
             message={errorMessage}
             onClose={() => setErrorMessage('')} 
           />
+        )}
+        {!!rotateMessage && (
+          <RotateMessage/>
         )}
       </View>
     </ImageBackground>
