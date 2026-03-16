@@ -48,7 +48,7 @@ export const PickBlank = ({
 
 const styles = (width: number) => StyleSheet.create({
   pickBlankContainer: {
-    maxWidth: width * 0.3,
+    maxWidth: width * 0.4,
     width: '60%',
     zIndex: 3,
     marginBottom: '3%',
