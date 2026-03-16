@@ -1,8 +1,8 @@
 import {
   ImageBackground,
+  ScrollView,
   StyleSheet,
   useWindowDimensions,
-  View,
 } from 'react-native'
 import { useEffect, useState } from 'react'
 
@@ -15,6 +15,7 @@ import { Bracelet } from '@/components/Bracelet'
 import { Bracelet as BraceletType } from '@/utils/types/bracelet.types'
 import { Stamp } from '@/utils/types/stamp.types'
 import { PickBlank } from '@/components/PickBlank'
+import { Stamps } from '@/components/Stamps'
 import { blanks } from '@/data/Blanks'
 
 export default function Home() {
@@ -35,11 +36,9 @@ export default function Home() {
       style={styles.background}
     >
       <Header />
-      <View
-        style={[
-          styles.contents,
-          globalStyles.centerV,
-        ]}
+      <ScrollView
+        style={styles.contentsScroll}
+        contentContainerStyle={[styles.contents, globalStyles.centerV]}
       >
         {!!errorMessage && (
           <ErrorMessage
@@ -62,12 +61,17 @@ export default function Home() {
               selectedStamps={selectedStamps}
             />
 
-            {/* {selectedBlank.shape && (
-              <Stamps/>
-            )} */}
+            {selectedBlank?.shape && (
+              <Stamps
+                blankSize={selectedBlank.width}
+                selectedStamps={selectedStamps}
+                setSelectedStamps={setSelectedStamps}
+                setErrorMessage={setErrorMessage}
+              />
+            )}
           </>
         )}
-      </View>
+      </ScrollView>
     </ImageBackground>
   )
 }
@@ -78,7 +82,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  contents: {
+  contentsScroll: {
     position: 'absolute',
     top: 25,
     right: 10,
@@ -86,5 +90,9 @@ const styles = StyleSheet.create({
     bottom: 10,
     backgroundColor: colors.white2,
     borderRadius: 16,
+  },
+  contents: {
+    flexGrow: 1,
+    padding: 10,
   },
 })

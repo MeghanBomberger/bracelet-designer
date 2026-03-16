@@ -89,8 +89,8 @@ export const Bracelet = ({
       <View style={braceletStyles.stampsOverlay}>
         {selectedStamps.map((stamp, i) => {
           const StampComponent = stampComponents[stamp.symbol];
-          if (!StampComponent) return null;
           const size = stamp.size_mm * width * 0.006;
+          if (!StampComponent) return <View key={`${stamp.id}-${i}`} style={{ width: size, height: size }} />;
           return (
             <StampComponent
               key={`${stamp.id}-${i}`}
