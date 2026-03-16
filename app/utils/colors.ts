@@ -1,4 +1,5 @@
 export const colors = {
+  stamp: '#231f20',
   black1: 'rgba(0, 0, 0, 0.1)',
   black15: 'rgba(0, 0, 0, 0.15)',
   black25: 'rgba(0, 0, 0, 0.25)',

@@ -1,0 +1,25 @@
+import { Svg, Defs, Filter, FeDropShadow, G, Path } from 'react-native-svg';
+import { SVGProps } from '../../svg.type';
+import { colors } from '../../../../utils/colors';
+
+export const Smiley = ({
+  width = 43.25,
+  height = 43.25,
+  color = colors.stamp,
+  sizeRatio = 1,
+}: SVGProps) => (
+  <Svg
+    width={width * sizeRatio}
+    height={height * sizeRatio}
+    viewBox="0 0 43.25 43.25"
+  >
+    <Defs>
+      <Filter id="shadow">
+        <FeDropShadow dx="1" dy="1" stdDeviation="1.5" floodColor={colors.white15} />
+      </Filter>
+    </Defs>
+    <G fill={color} filter="url(#shadow)">
+      <Path d="M207.88,99.89a21.61,21.61,0,1,0,14.28,20.34A21.63,21.63,0,0,0,207.88,99.89ZM206.73,137a17.88,17.88,0,1,1,11.68-16.77A18.09,18.09,0,0,1,206.73,137Z" transform="translate(-178.91 -98.6)"/><Path d="M209.73,126.28c-2.3,3.43-5.93,5.85-10.18,5.39a12.23,12.23,0,0,1-9-6.4c-1.2-2.09-4.44-.21-3.24,1.89a16,16,0,0,0,12.2,8.26c5.59.54,10.41-2.77,13.41-7.24C214.31,126.17,211.07,124.29,209.73,126.28Z" transform="translate(-178.91 -98.6)"/><Path d="M195.1,123.58a1.91,1.91,0,0,0,1.87-1.87v-10.3a1.88,1.88,0,0,0-3.75-.27,1.22,1.22,0,0,0,0,.27v10.3A1.9,1.9,0,0,0,195.1,123.58Z" transform="translate(-178.91 -98.6)"/><Path d="M206,123.58a1.9,1.9,0,0,0,1.88-1.87v-10.3a1.88,1.88,0,0,0-3.75-.27,1.22,1.22,0,0,0,0,.27v10.3A1.89,1.89,0,0,0,206,123.58Z" transform="translate(-178.91 -98.6)"/>
+    </G>
+  </Svg>
+);

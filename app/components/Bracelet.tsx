@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 
 import { Bracelet as BraceletType, defaultBracelet, Metal, Shape } from "@/utils/types/bracelet.types";
 import { Stamp } from "@/utils/types/stamp.types";
+import { stampComponents } from "@/assets/images/stamps";
 
 interface BraceletProps {
   bracelet: BraceletType | null;
@@ -88,9 +89,19 @@ export const Bracelet = ({
           { borderRadius, borderWidth: insetBorderWidth },
         ]} />
         <View style={braceletStyles.contentContainer}>
-          {selectedStamps?.map((stamp) => (
-            <View key={stamp.id} />
-          ))}
+          {selectedStamps.map((stamp, i) => {
+            const StampComponent = stampComponents[stamp.symbol];
+            if (!StampComponent) return null;
+            const size = stamp.size_mm * width * 0.006;
+            return (
+              <StampComponent
+                key={`${stamp.id}-${i}`}
+                width={size}
+                height={size}
+                color="rgba(3, 40, 70, 0.65)"
+              />
+            );
+          })}
         </View>
       </ImageBackground>
     </Animated.View>
@@ -127,6 +138,9 @@ const styles = (width: number) => StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     zIndex: 1,
   },
   centerMark: {
@@ -139,5 +153,9 @@ const styles = (width: number) => StyleSheet.create({
     backgroundColor: 'rgba(3, 40, 70, 0.25)',
     borderRadius: 2,
     zIndex: 2,
-  }
+  },
+  stamped: {
+    marginHorizontal: 3,
+    opacity: 0.65,
+  },
 })
