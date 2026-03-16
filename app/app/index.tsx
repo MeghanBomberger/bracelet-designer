@@ -21,11 +21,7 @@ export default function Home() {
   const [errorMessage, setErrorMessage] = useState<string>('')
   const [rotateMessage, setRotateMessage] = useState<boolean>(true)
   const [selectedBlank, setSelectedBlank] = useState<BraceletType | null>(null)
-  const [selectedStamps, setSelectedStamps] = useState<Stamp[]>([
-    { id: 25, symbol: 'lollipop-a.svg', text: 'a', type: 'uppercase,alphanumeric', size_mm: 4.0 },
-    { id: 26, symbol: 'lollipop-b.svg', text: 'b', type: 'uppercase,alphanumeric', size_mm: 4.0 },
-    { id: 27, symbol: 'lollipop-c.svg', text: 'c', type: 'uppercase,alphanumeric', size_mm: 4.0 },
-  ])
+  const [selectedStamps, setSelectedStamps] = useState<Stamp[]>([])
 
   useEffect(() => {
     setRotateMessage(height > width)
@@ -56,7 +52,6 @@ export default function Home() {
         {!rotateMessage && (
           <>
             <PickBlank
-              selectedBlank={selectedBlank}
               setSelectedBlank={setSelectedBlank}
               largestStamp={selectedStamps.reduce((largest, stamp) => stamp.size_mm > largest.size_mm ? stamp : largest, selectedStamps[0])}
             />
