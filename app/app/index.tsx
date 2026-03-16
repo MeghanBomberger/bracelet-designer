@@ -15,6 +15,7 @@ import { Bracelet } from '@/components/Bracelet'
 import { Bracelet as BraceletType } from '@/utils/types/bracelet.types'
 import { Stamp } from '@/utils/types/stamp.types'
 import { PickBlank } from '@/components/PickBlank'
+import { Stamps } from '@/components/Stamps'
 import { blanks } from '@/data/Blanks'
 
 export default function Home() {
@@ -62,9 +63,14 @@ export default function Home() {
               selectedStamps={selectedStamps}
             />
 
-            {/* {selectedBlank.shape && (
-              <Stamps/>
-            )} */}
+            {selectedBlank?.shape && (
+              <Stamps
+                blankSize={selectedBlank.width}
+                selectedStamps={selectedStamps}
+                setSelectedStamps={setSelectedStamps}
+                setErrorMessage={setErrorMessage}
+              />
+            )}
           </>
         )}
       </View>
