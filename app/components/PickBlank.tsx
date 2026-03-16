@@ -29,17 +29,19 @@ export const PickBlank = ({
 
   return (
     <View style={pickBraceletStyles.pickBlankContainer}>
-      <DropDownPicker
-        open={open}
-        value={value}
-        items={blanksOptions}
-        setOpen={setOpen}
-        setValue={setValue}
-        onSelectItem={(item) => {
-          const blank = blanks.find(b => b.id === item.value)
-          setSelectedBlank?.(blank ?? null)
-        }}
-      />
+      {blanksOptions.length > 0 && (
+        <DropDownPicker
+          open={open}
+          value={value}
+          items={blanksOptions}
+          setOpen={setOpen}
+          setValue={setValue}
+          onSelectItem={(item) => {
+            const blank = blanks.find(b => b.id === item.value)
+            setSelectedBlank?.(blank ?? null)
+          }}
+        />
+      )}
     </View>
   )
 }
