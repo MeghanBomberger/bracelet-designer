@@ -87,16 +87,17 @@ export const Bracelet = ({
 
       {/* Stamps rendered on top of canvas */}
       <View style={braceletStyles.stampsOverlay}>
-        {selectedStamps.map((stamp, i) => {
+        {selectedStamps.slice(0, 30).map((stamp, i) => {
           const StampComponent = stampComponents[stamp.symbol];
-          const size = stamp.size_mm * width * 0.006;
-          if (!StampComponent) return <View key={`${stamp.id}-${i}`} style={{ width: size, height: size }} />;
+          // Use sizeRatio for scaling
+          const sizeRatio = 0.3; // Adjust for desired scale
+          if (!StampComponent) return <View key={`${stamp.id}-${i}`} style={{ marginLeft: 1, marginRight: 1 }} />;
           return (
-            <StampComponent
-              key={`${stamp.id}-${i}`}
-              width={size}
-              height={size}
-            />
+            <View key={`${stamp.id}-${i}`} style={{ marginLeft: 1, marginRight: 1 }}>
+              <StampComponent
+                sizeRatio={sizeRatio}
+              />
+            </View>
           );
         })}
       </View>
