@@ -84,6 +84,9 @@ export const Bracelet = ({
           braceletStyles.insetShadow,
           { borderRadius, borderWidth: insetBorderWidth },
         ]} />
+        {selectedStamps?.length > 0 && (
+          <View style={braceletStyles.centerMark} />
+        )}
         <View style={braceletStyles.contentContainer} />
       </ImageBackground>
     </Animated.View>
@@ -122,4 +125,15 @@ const styles = (width: number) => StyleSheet.create({
     flex: 1,
     zIndex: 1,
   },
+  centerMark: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: '50%',
+    width: 4,
+    marginLeft: -2,
+    backgroundColor: 'rgba(3, 40, 70, 0.25)',
+    borderRadius: 2,
+    zIndex: 2,
+  }
 })
