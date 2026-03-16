@@ -9,6 +9,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint"
+      ,
+      "build:web": "expo build:web"
   },
   "dependencies": {
     "@expo-google-fonts/datatype": "^0.4.0",
