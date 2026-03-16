@@ -15,12 +15,13 @@ import { Bracelet } from '@/components/Bracelet'
 import { Bracelet as BraceletType } from '@/utils/types/bracelet.types'
 import { Stamp } from '@/utils/types/stamp.types'
 import { PickBlank } from '@/components/PickBlank'
+import { blanks } from '@/data/Blanks'
 
 export default function Home() {
   const { height, width } = useWindowDimensions()
   const [errorMessage, setErrorMessage] = useState<string>('')
   const [rotateMessage, setRotateMessage] = useState<boolean>(true)
-  const [selectedBlank, setSelectedBlank] = useState<BraceletType | null>(null)
+  const [selectedBlank, setSelectedBlank] = useState<BraceletType | null>(blanks.find(b => b.available) ?? null)
   const [selectedStamps, setSelectedStamps] = useState<Stamp[]>([])
 
   useEffect(() => {

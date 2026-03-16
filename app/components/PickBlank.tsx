@@ -17,8 +17,9 @@ export const PickBlank = ({
 }: PickBlankProps) => {
   const { width } = useWindowDimensions()
   const pickBraceletStyles = styles(width)
+  const firstAvailable = blanks.find(b => b.available) ?? null
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState<number | null>(null)
+  const [value, setValue] = useState<number | null>(firstAvailable?.id ?? null)
   const blanksOptions = blanks
     .filter(blank => blank.available && (largestStamp ? blank.width * 25.4 >= largestStamp.size_mm : true))
     .map(blank => ({
