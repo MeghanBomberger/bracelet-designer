@@ -21,11 +21,12 @@ export const PickBlank = ({
   const pickBraceletStyles = styles(width)
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState<number | null>(null)
-  const blanksOptions = blanks.map(blank => ({
-    value: blank.id,
-    label: `${blank.shape.charAt(0).toUpperCase()}${blank.shape.slice(1)} - ${blank.width}" x ${blank.length}" - ${blank.metal}`,
-    disabled: largestStamp ? blank.width * 25.4 < largestStamp.size_mm : false,
-  }))
+  const blanksOptions = blanks
+    .filter(blank => blank.available && (largestStamp ? blank.width * 25.4 >= largestStamp.size_mm : true))
+    .map(blank => ({
+      value: blank.id,
+      label: `${blank.shape.charAt(0).toUpperCase()}${blank.shape.slice(1)} - ${blank.width}" x ${blank.length}" - ${blank.metal}`,
+    }))
 
   return (
     <View style={pickBraceletStyles.pickBlankContainer}>
@@ -51,5 +52,7 @@ const styles = (width: number) => StyleSheet.create({
     maxWidth: width * 0.3,
     width: '60%',
     zIndex: 3,
+    marginBottom: '10%',
+    marginTop: '-15%',
   }
 })
