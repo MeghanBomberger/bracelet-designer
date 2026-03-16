@@ -16,7 +16,7 @@ const SPACE_STAMP: Stamp = {
   size_mm: 2.0,
 };
 
-const MAX_STAMPS = 40;
+const MAX_STAMPS = 30;
 
 interface StampsProps {
   blankSize: number; // blank width in inches
@@ -51,7 +51,7 @@ export const Stamps = ({
   const selectStamp = (stamp: Stamp) => {
     if (!fitsBlank(stamp.size_mm)) return;
     if (selectedStamps.length >= MAX_STAMPS) {
-      setErrorMessage('Sorry, only 40 characters can fit on this bracelet');
+      setErrorMessage('Sorry, only 30 characters can fit on this bracelet');
       return;
     }
     setSelectedStamps([...selectedStamps, stamp]);
@@ -71,7 +71,7 @@ export const Stamps = ({
 
   const addSpace = () => {
     if (selectedStamps.length >= MAX_STAMPS) {
-      setErrorMessage('Sorry, only 40 characters can fit on this bracelet');
+      setErrorMessage('Sorry, only 30 characters can fit on this bracelet');
       return;
     }
     setSelectedStamps([...selectedStamps, SPACE_STAMP]);

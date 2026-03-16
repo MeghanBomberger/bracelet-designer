@@ -44,8 +44,8 @@ export default function Home() {
           <ErrorMessage
             message={errorMessage}
             onClose={() => setErrorMessage('')}
-          />
-        )} */}
+          /> //TODO placement fix needed to avoid overlapping on mobible
+        )} */} 
         {!!rotateMessage && (
           <RotateMessage />
         )}
