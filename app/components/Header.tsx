@@ -18,12 +18,12 @@ export const Header = () => {
           height={
             height > width
               ? height * 0.02
-              : height * 0.0375
+              : height * 0.0275
           }
           width={
             height > width
               ? height * 0.02 * logoRatioWtoH
-              : height * 0.0375 * logoRatioWtoH
+              : height * 0.0275 * logoRatioWtoH
           }
           color={colors.white65}
         />
