@@ -40,12 +40,12 @@ export default function Home() {
         style={styles.contentsScroll}
         contentContainerStyle={[styles.contents, globalStyles.centerV]}
       >
-        {!!errorMessage && (
+        {/* {!!errorMessage && (
           <ErrorMessage
             message={errorMessage}
             onClose={() => setErrorMessage('')}
-          />
-        )}
+          /> //TODO placement fix needed to avoid overlapping on mobible
+        )} */} 
         {!!rotateMessage && (
           <RotateMessage />
         )}

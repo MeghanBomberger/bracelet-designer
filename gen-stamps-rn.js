@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const stampsDir = path.join(__dirname, 'app/assets/images/stamps');
+const stampsDir = path.join(__dirname, 'app/assets/images/stamps'); 
 
 function toPascalCase(filename) {
   return filename.replace('&', 'ampersand').split('-').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join('');
