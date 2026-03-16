@@ -17,7 +17,7 @@ export interface Bracelet {
 }
 
 export const defaultBracelet: Bracelet = {
-  width: 10, //TODO update with actual default width
-  metal: Metal.copper,
-  shape: Shape.tapered,
+  width: 0.25, //TODO update with actual default width
+  metal: Metal.aluminum,
+  shape: Shape.straight,
 }

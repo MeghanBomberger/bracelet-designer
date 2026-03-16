@@ -21,7 +21,7 @@ export default function RootLayout() {
     Datatype_400Regular,
   });
 
-  if (!rowdieFontsLoaded || !montserratFontsLoaded || !datatypeFontsLoaded ) {
+  if (!rowdieFontsLoaded || !montserratFontsLoaded || !datatypeFontsLoaded) {
     return null;
   }
 
