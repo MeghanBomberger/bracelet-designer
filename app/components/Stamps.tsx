@@ -7,7 +7,6 @@ import { Stamp } from '@/utils/types/stamp.types';
 import { colors } from '@/utils/colors';
 import { globalStyles } from '@/utils/global.styles';
 import { DownArrow } from '@/assets/images/down-arrow-2';
-import { RoundedSquare } from '@/assets/images/rounded-black-square-shape';
 
 const SPACE_STAMP: Stamp = {
   id: -1,
@@ -131,7 +130,7 @@ export const Stamps = ({
                   {
                     width: isSymbolSet ? undefined : sizePx,
                     height: sizePx,
-                    backgroundColor: fits ? colors.white5 : colors.white15,
+                    opacity: fits ? 1 : 0.3,
                   },
                   fits && styles.stampButtonFits,
                 ]}
@@ -140,7 +139,7 @@ export const Stamps = ({
                   <StampComponent
                     width={sizePx * 0.8}
                     height={sizePx * 0.8}
-                    color={fits ? colors.white : 'rgba(255,255,255,0.3)'}
+                    color={colors.white}
                   />
                 )}
               </Pressable>
@@ -172,7 +171,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 32,
     paddingTop: 24,
-    borderTopWidth: 3,
+    borderTopWidth: 2,
     borderTopColor: colors.white65,
     width: '100%',
   },
@@ -196,9 +195,8 @@ const styles = StyleSheet.create({
     marginHorizontal: '5%',
   },
   stampButton: {
+    ...globalStyles.keyboardButton,
     ...globalStyles.centerH,
-    margin: 4,
-    borderRadius: 4,
     overflow: 'hidden',
   },
   stampButtonFits: {
@@ -212,21 +210,17 @@ const styles = StyleSheet.create({
     ...globalStyles.centerH,
     marginTop: 24,
     paddingVertical: 24,
-    borderTopWidth: 3,
+    borderTopWidth: 2,
     borderTopColor: colors.white4,
-    borderBottomWidth: 3,
+    borderBottomWidth: 2,
     borderBottomColor: colors.white65,
   },
   controlButton: {
+    ...globalStyles.keyboardButton,
     ...globalStyles.centerH,
-    borderWidth: 1,
-    borderColor: colors.white65,
-    borderRadius: 4,
     paddingVertical: 8,
     paddingHorizontal: 48,
-    marginHorizontal: 8,
-    maxWidth: 240,
-    backgroundColor: colors.white15,
+    maxWidth: 480,
   },
   spaceButton: {
     width: '40%',

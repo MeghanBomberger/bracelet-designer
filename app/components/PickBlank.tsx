@@ -51,7 +51,6 @@ const styles = (width: number) => StyleSheet.create({
     maxWidth: width * 0.3,
     width: '60%',
     zIndex: 3,
-    marginBottom: '10%',
-    marginTop: '-15%',
+    marginBottom: '3%',
   }
 })
