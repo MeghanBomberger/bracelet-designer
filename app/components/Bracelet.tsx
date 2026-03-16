@@ -67,6 +67,9 @@ export const Bracelet = ({
         shadowStyle,
       ]}
     >
+      {selectedStamps?.length > 0 && (
+        <View style={braceletStyles.centerMark} />
+      )}
       <ImageBackground
         source={require('@/assets/images/metal-texture.jpg')}
         style={braceletStyles.bracelet}
@@ -84,10 +87,11 @@ export const Bracelet = ({
           braceletStyles.insetShadow,
           { borderRadius, borderWidth: insetBorderWidth },
         ]} />
-        {selectedStamps?.length > 0 && (
-          <View style={braceletStyles.centerMark} />
-        )}
-        <View style={braceletStyles.contentContainer} />
+        <View style={braceletStyles.contentContainer}>
+          {selectedStamps?.map((stamp) => (
+            <View key={stamp.id} />
+          ))}
+        </View>
       </ImageBackground>
     </Animated.View>
   )
