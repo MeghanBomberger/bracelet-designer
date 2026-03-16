@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 
 import { stamps } from '@/data/Stamps';
 import { stampComponents } from '@/assets/images/stamps';
@@ -27,7 +27,7 @@ interface StampsProps {
 
 const ArrowIcon = ({ direction }: { direction: 'left' | 'right' }) => (
   <View style={{ transform: [{ rotate: direction === 'left' ? '90deg' : '270deg' }] }}>
-    <DownArrow width={64} height={64} color={colors.white65} />
+    <DownArrow width={40} height={40} color={colors.white65} />
   </View>
 );
 
@@ -40,6 +40,8 @@ export const Stamps = ({
   const stampSetNames = Object.keys(stamps);
   const defaultSet = Math.max(0, stampSetNames.indexOf('lollipop'));
   const [currentSet, setCurrentSet] = useState(defaultSet);
+  const { width } = useWindowDimensions();
+  const baseUnit = Math.min(width / 120, 9);
 
   const fitsBlank = (size_mm: number) => blankSize > size_mm * 0.0393701 + 0.015;
 
@@ -113,14 +115,11 @@ export const Stamps = ({
           <ArrowIcon direction="left" />
         </Pressable>
 
-        <ScrollView
-          style={styles.stampScroll}
-          contentContainerStyle={styles.stampSet}
-        >
+        <View style={styles.stampSet}>
           {currentStamps.map(stamp => {
             const StampComponent = stampComponents[stamp.symbol];
             const fits = fitsBlank(stamp.size_mm);
-            const sizePx = stamp.size_mm * 12;
+            const sizePx = stamp.size_mm * baseUnit;
             return (
               <Pressable
                 key={stamp.id}
@@ -145,7 +144,7 @@ export const Stamps = ({
               </Pressable>
             );
           })}
-        </ScrollView>
+        </View>
 
         <Pressable onPress={nextStampSet} style={styles.arrowButton}>
           <ArrowIcon direction="right" />
@@ -180,19 +179,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   arrowButton: {
-    width: 144,
+    width: 64,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  stampScroll: {
-    flex: 1,
-  },
   stampSet: {
+    flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
     maxWidth: 1040,
-    marginHorizontal: '5%',
+    marginHorizontal: '2%',
   },
   stampButton: {
     ...globalStyles.keyboardButton,
@@ -200,7 +197,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   stampButtonFits: {
-    shadowColor: 'rgba(0,0,0,0.25)',
+    shadowColor: colors.black25,
     shadowOffset: { width: 8, height: 8 },
     shadowOpacity: 1,
     shadowRadius: 8,
