@@ -14,6 +14,7 @@ import { RotateMessage } from '@/components/RotateMessage'
 import { Bracelet } from '@/components/Bracelet'
 import { Bracelet as BraceletType } from '@/utils/types/bracelet.types'
 import { Stamp } from '@/utils/types/stamp.types'
+import { PickBlank } from '@/components/PickBlank'
 
 export default function Home() {
   const { height, width } = useWindowDimensions()
@@ -54,7 +55,11 @@ export default function Home() {
         )}
         {!rotateMessage && (
           <>
-            {/* <PickBlank/> */}
+            <PickBlank
+              selectedBlank={selectedBlank}
+              setSelectedBlank={setSelectedBlank}
+              largestStamp={selectedStamps.reduce((largest, stamp) => stamp.size_mm > largest.size_mm ? stamp : largest, selectedStamps[0])}
+            />
 
             <Bracelet
               bracelet={selectedBlank}
