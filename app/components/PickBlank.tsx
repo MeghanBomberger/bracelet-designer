@@ -7,13 +7,11 @@ import { Bracelet } from '@/utils/types/bracelet.types';
 import { Stamp } from '@/utils/types/stamp.types';
 
 interface PickBlankProps {
-  selectedBlank?: Bracelet | null;
   setSelectedBlank?: (blank: Bracelet | null) => void;
   largestStamp?: Stamp | null;
 }
 
 export const PickBlank = ({
-  selectedBlank,
   setSelectedBlank,
   largestStamp,
 }: PickBlankProps) => {
